@@ -1,10 +1,16 @@
 {
     "name": "diff-card-list-example",
     "version": "1.0.0",
+    "scripts": {
+        "format": "npx @biomejs/biome check --apply ./src/"
+      },
     "dependencies": {
         "@bionamic/body": "4.0.3",
-        "@bionamic/util": "2.0.5",
         "@bionamic/component": "6.0.0",
+        "@bionamic/util": "2.0.5",
         "xlsx": "^0.18.5"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "1.6.1"
     }
 }
