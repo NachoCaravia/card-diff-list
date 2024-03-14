@@ -1,0 +1,10 @@
+{
+    "name": "diff-card-list-example",
+    "version": "1.0.0",
+    "dependencies": {
+        "@bionamic/body": "4.0.3",
+        "@bionamic/util": "2.0.5",
+        "@bionamic/component": "6.0.0",
+        "xlsx": "^0.18.5"
+    }
+}

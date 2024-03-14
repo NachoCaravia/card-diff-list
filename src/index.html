@@ -1,0 +1,353 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Diff Card List Component</title>
+		<link rel="icon" href="data:," />
+		<link rel="stylesheet" href="./css/styles.css" media="screen" />
+		<link rel="stylesheet" href="./css/icons.css" media="screen" />
+		<script type="importmap">
+			{
+				"imports": {
+					"@lit/reactive-element": "../node_modules/@lit/reactive-element/reactive-element.js",
+					"@lit/reactive-element/": "../node_modules/@lit/reactive-element/",
+					"lit": "../node_modules/lit/index.js",
+					"lit/": "../node_modules/lit/",
+					"lit-element": "../node_modules/lit-element/index.js",
+					"lit-element/": "../node_modules/lit-element/",
+					"lit-html": "../node_modules/lit-html/lit-html.js",
+					"lit-html/": "../node_modules/lit-html/",
+					"@bionamic/body": "../node_modules/@bionamic/body/dist/index.js",
+					"@bionamic/util": "../node_modules/@bionamic/util/dist/index.js",
+					"xlsx": "/node_modules/@bionamic/util/node_modules/xlsx/xlsx.mjs",
+					"internmap": "../node_modules/internmap/src/index.js",
+					"delaunator": "../node_modules/delaunator/index.js",
+					"robust-predicates": "../node_modules/robust-predicates/index.js"
+				}
+			}
+		</script>
+		<script type="module">
+			import {
+				BnMatrixRowDiffList,
+				getHeaderFromMatrixRow,
+			} from "./matrix-row-diff-list.js";
+
+			const matrixRow1 = [
+			[
+					"Click me - Testing extremly long span content",
+					`CAAGTTAAATTACAAGAAAGTGGTGCTGAATTAGCTAGACCTGGTGCTAGTGTTAAATTAAGTTGTAAAGCTAGTGGTTATACTTTTACTAATTATTGGATGCAATGGGTTAAACAAAGACCTGGTCAAGGTTTAGATTGGATTGGTGCTATTTATCCTGGTGATGGTAATACTAGATATACTCATAAATTTAAAGGTAAAGCTACTTTAACTGCTGATAAAAGTAGTAGTACTGCTTATATGCAATTAAGTAGTTTAGCTAGTGAAGATAGTGGTGTTTATTATTGTGCTAGAGGTGAAGGTAATTATGCTTGGTTTGCTTATTGGGGTCAAGGTACTACTGTTACTGTTAGTAGT
+					<link rel="stylesheet" href="/assets/css/styles.css" media="screen" />
+					<dialog class="modal diff-card-values">
+					<form>
+					<div class="container">
+						<div class="title">Row details</div>
+						<div class="values-container">
+							<h4>Key name</h4>
+							<div class="key">
+								<span class="text key"></span>
+							</div>
+							<div class="label-container label-1">
+								<h4></h4>
+								<bd-icon-button class="copy"></bd-icon-button>
+							</div>
+							<div>
+								<span class="text value-1"></span>
+							</div>
+							<div class="label-container label-2">
+								<h4></h4>
+								<bd-icon-button class="copy"></bd-icon-button>
+							</div>
+							<div>
+								<span class="text value-2"></span>
+							</div>
+						</div>
+					</div>
+						<div class="buttons">
+							<button class="confirm">OK</button>
+						</div>
+					</form>
+					</dialog>
+					<link rel="stylesheet" href="/assets/css/styles.css" media="screen" />
+					<dialog class="modal diff-card-values">
+					<form>
+					<div class="container">
+						<div class="title">Row details</div>
+						<div class="values-container">
+							<h4>Key name</h4>
+							<div class="key">
+								<span class="text key"></span>
+							</div>
+							<div class="label-container label-1">
+								<h4></h4>
+								<bd-icon-button class="copy"></bd-icon-button>
+							</div>
+							<div>
+								<span class="text value-1"></span>
+							</div>
+							<div class="label-container label-2">
+								<h4></h4>
+								<bd-icon-button class="copy"></bd-icon-button>
+							</div>
+							<div>
+								<span class="text value-2"></span>
+							</div>
+						</div>
+					</div>
+						<div class="buttons">
+							<button class="confirm">OK</button>
+						</div>
+					</form>
+					</dialog>`,
+				],
+				["/general/row-type", "spec"],
+				["/general/row-name", "Free"],
+				["/general/user-creation", "eve"],
+				["/general/time-creation", "2020-08-15 19:55:00"],
+				["/general/user-last-change", "eve"],
+				["/general/time-last-change", "2020-08-15 19:55:00"],
+				["/spec/duck-type", "free"],
+				["/spec/icon", "customItem"],
+				["/spec/description", "Free items with a note."],
+				["/spec/group", "Free"],
+				[
+					"/spec/naming-rule",
+					'[{"kind":"fixed","value":"Free item "},{"kind":"counter","startingNumber":1,"padding":0}]',
+				],
+				[
+					"/spec/property-rule/Note",
+					'{"optional":true,"encodableConfig":{"bCellType":"Text","enumValues":[]},"defaultValue":{"bCellType":"Text","value":"Small note"}}',
+				],
+				[
+					"/spec/property-rule/Status",
+					'{"optional":false,"encodableConfig":{"bCellType":"Text","enumValues":["Success","Fail","Undetermined"]},"defaultValue":{"bCellType":"Text","value":"Undetermined"}}',
+				],
+			];
+			const matrixRow2 = [
+			[
+					"Click me - Testing extremly long span content",
+					`CAAGTTAAATTACAAGAAAGTGGTGCTGAATTAGCTAGACCTGGTGCTAGTGTTAAATTAAGTTGTAAAGCTAGTGGTTATACTTTTACTAATTATTGGATGCAATGGGTTAAACAAAGACCTGGTCAAGGTTTAGATTGGATTGGTGCTATTTATCCTGGTGATGGTAATACTAGATATACTCATAAATTTAAAGGTAAAGCTACTTTAACTGCTGATAAAAGTAGTAGTACTGCTTATATGCAATTAAGTAGTTTAGCTAGTGAAGATAGTGGTGTTTATTATTGTGCTAGAGGTGAAGGTAATTATGCTTGGTTTGCTTATTGGGGTCAAGGTACTACTGTTACTGTTAGTAGT
+					<link rel="stylesheet" href="/assets/css/styles.css" media="screen" />
+					<dialog class="modal diff-card-values">
+					<form>
+					<div class="container">
+						<div class="title">Row details</div>
+						<div class="values-container">
+							<h4>Key name</h4>
+							<div class="key">
+								<span class="text key"></span>
+							</div>
+							<div class="label-container label-1">
+								<h4></h4>
+								<bd-icon-button class="copy"></bd-icon-button>
+							</div>
+							<div>
+								<span class="text value-1"></span>
+							</div>
+							<div class="label-container label-2">
+								<h4></h4>
+								<bd-icon-button class="copy"></bd-icon-button>
+							</div>
+							<div>
+								<span class="text value-2"></span>
+							</div>
+						</div>
+					</div>
+						<div class="buttons">
+							<button class="confirm">OK</button>
+						</div>
+					</form>
+					</dialog>
+					<link rel="stylesheet" href="/assets/css/styles.css" media="screen" />
+					<dialog class="modal diff-card-values">
+					<form>
+					<div class="container">
+						<div class="title">Row details</div>
+						<div class="values-container">
+							<h4>Key name</h4>
+							<div class="key">
+								<span class="text key"></span>
+							</div>
+							<div class="label-container label-1">
+								<h4></h4>
+								<bd-icon-button class="copy"></bd-icon-button>
+							</div>
+							<div>
+								<span class="text value-1"></span>
+							</div>
+							<div class="label-container label-2">
+								<h4></h4>
+								<bd-icon-button class="copy"></bd-icon-button>
+							</div>
+							<div>
+								<span class="text value-2"></span>
+							</div>
+						</div>
+					</div>
+						<div class="buttons">
+							<button class="confirm">OK</button>
+						</div>
+					</form>
+					</dialog>`,
+				],
+				["/general/row-type", "spec"],
+				["/general/row-name", "New name"],
+				["/general/user-creation", "eve"],
+				["/general/time-creation", "2020-08-15 19:55:00"],
+				["/general/user-last-change", "nacho"],
+				["/general/time-last-change", "2022-08-15 19:55:00"],
+				["/spec/duck-type", "free"],
+				["/spec/icon", "customItem"],
+				["/spec/description", "Another description"],
+				["/spec/group", "Free"],
+				[
+					"/spec/property-rule/Note",
+					'{"optional":true,"encodableConfig":{"bCellType":"Text","enumValues":[]},"defaultValue":{"bCellType":"Text","value":"Small note"}}',
+				],
+				[
+					"/spec/property-rule/Target",
+					'{"optional":true,"encodableConfig":{"bCellType":"Text","enumValues":[]},"defaultValue":{"bCellType":"Text","value":"Target"}}',
+				],
+				[
+					"/spec/property-rule/HTMLTag test",
+					"<span style='font-family:Comic Sans MS, Comic Sans, cursive;'>Weird text</span>",
+				],
+			];
+			const matrixRow_2_1 = [
+				["/general/row-type", "spec"],
+				["/general/row-name", "DNA test"],
+				["/general/user-creation", "Martha"],
+				["/general/time-creation", "2020-08-15 19:55:00"],
+				["/general/user-last-change", "Martha"],
+				["/general/time-last-change", "2020-08-15 19:55:00"],
+				[
+					"/spec/DNA",
+					"CAAGTTAAATTACAAGAAAGTGGTGCTGAATTAGCTAGACCTGGTGCTAGTGTTAAATTAAGTTGTAAAGCTAGTGGTTATACTTTTACTAATTATTGGATGCAATGGGTTAAACAAAGACCTGGTCAAGGTTTAGATTGGATTGGTGCTATTTATCCTGGTGATGGTAATACTAGATATACTCATAAATTTAAAGGTAAAGCTACTTTAACTGCTGATAAAAGTAGTAGTACTGCTTATATGCAATTAAGTAGTTTAGCTAGTGAAGATAGTGGTGTTTATTATTGTGCTAGAGGTGAAGGTAATTATGCTTGGTTTGCTTATTGGGGTCAAGGTACTACTGTTACTGTTAGTAGT",
+				],
+				[
+					"/spec/property-rule/Note",
+					'{"optional":true,"encodableConfig":{"bCellType":"Text","enumValues":[]},"defaultValue":{"bCellType":"Text","value":"Small note"}}',
+				],
+				[
+					"/spec/property-rule/Status",
+					'{"optional":false,"encodableConfig":{"bCellType":"Text","enumValues":["Success","Fail","Undetermined"]},"defaultValue":{"bCellType":"Text","value":"Undetermined"}}',
+				],
+			];
+			const matrixRow_2_2 = [
+				["/general/row-type", "spec"],
+				["/general/row-name", "DNA test (modified)"],
+				["/general/user-creation", "Martha"],
+				["/general/time-creation", "2020-08-15 19:55:00"],
+				["/general/user-last-change", "Igor"],
+				["/general/time-last-change", "2022-08-15 19:55:00"],
+				[
+					"/spec/DNA",
+					"AAATTACAAGAAAGTGGTGCTGAATTAGCTAGACCTGGTGCTAGTGTTAAATTAAGTTGTAAAGCTAGTGGTTATACTTTTACTAATTATTGGATGCAATGGGTTAAACAAAGACCTGGTCAAGGTTTAGATTGGATTGGTGCTATTTATCCTGGTGATGGTAATACTAGATATACTCATAAATTTAAAGGTAAAGCTACTTTAACTGCTGATAAAAGTAGTAGTACTGCTTATATGCAATTAAGTAGTTTAGCTAGTGAAGATAGTGGTGTTTATTATTGTGCTAGAGGTGAAGGTAATTATGCTTGGTTTGCTTATTGGGGTCAAGGTACTACTGTTACTGTTAGTAGT",
+				],
+				[
+					"/spec/property-rule/HTMLTag test",
+					"<span style='font-family:Comic Sans MS, Comic Sans, cursive;'>Weird text</span>",
+				],
+			];
+			const specialRow1 = [
+				["/general/row-type", "spec"],
+				["/general/row-name", "special"],
+			];
+			const specialRow2 = [
+				["/general/row-type", "spec"],
+				["/general/row-name", "special changed"],
+			];
+			const itemDeleted = [
+				["/general/row-type", "spec"],
+				["/general/row-name", "Item Deleted"],
+				["/general/user-creation", "Martha"],
+				["/general/time-creation", "2020-08-15 19:55:00"],
+				["/general/user-last-change", "Martha"],
+			];
+			const cardIC = {
+				navigate: () => console.log(`Opening Navigable card in new tab`),
+				discardChanges: () =>
+					console.log("Changes in Navigable card discarded"),
+				getTitle: () => "Navigable card",
+				getMatrixRowValues1: () => matrixRow1,
+				getMatrixRowValues2: () => matrixRow2,
+			};
+			const cardIC2 = {
+				navigate: null,
+				discardChanges: () => console.log("Changes in DNA sequence discarded"),
+				getTitle: () => "DNA sequence",
+				getMatrixRowValues1: () => matrixRow_2_1,
+				getMatrixRowValues2: () => matrixRow_2_2,
+			};
+			const cardICSpecial = {
+				navigate: () => console.log(`Opening Special in new tab`),
+				discardChanges: () => console.log("Changes in Special discarded"),
+				getTitle: () => "Platypus",
+				getMatrixRowValues1: () => specialRow1,
+				getMatrixRowValues2: () => specialRow2,
+			};
+			const maxNumOfRows = 1000;
+			const threshold = 10;
+			const root = document.getElementById("root");
+			const component = new BnMatrixRowDiffList();
+			const cards = [];
+			const icDeleted = {
+				navigate: null,
+				discardChanges: null,
+				getTitle: () => "",
+				getMatrixRowValues1: () => itemDeleted,
+				getMatrixRowValues2: () => null,
+			};
+			cards.push(cardIC);
+			cards.push(icDeleted);
+			cards.push(cardIC2);
+			cards.push(cardICSpecial);
+			const randomId = () => Math.random().toString(36).substr(2, 9);
+			for (let i = 0; i < 500; i++) {
+				const numOfLines = Math.random() * 10;
+				const matrixRow1 = [];
+				const matrixRow2 = [];
+				const name1 = randomId();
+				const user1 = randomId();
+				const time1 = randomId();
+				const name2 = Math.random() < 0.5 ? name1 : randomId();
+				const user2 = Math.random() < 0.5 ? user1 : randomId();
+				const time2 = Math.random() < 0.5 ? time1 : randomId();
+				matrixRow1.push(["/general/row-name", name1]);
+				matrixRow1.push(["/general/user-last-change", user1]);
+				matrixRow1.push(["/general/time-creation", time1]);
+				matrixRow2.push(["/general/row-name", name2]);
+				matrixRow2.push(["/general/user-last-change", user2]);
+				matrixRow2.push(["/general/time-creation", time2]);
+				for (let i = 0; i < numOfLines; i++) {
+					const key1 = randomId();
+					const value1 = randomId();
+					matrixRow1.push([key1, value1]);
+					const key2 = Math.random() < 0.5 ? key1 : randomId();
+					const value2 = Math.random() < 0.5 ? value1 : randomId();
+					matrixRow2.push([key2, value2]);
+				}
+				const title = randomId();
+				const newCard = {
+					navigate: null,
+					discardChanges: null,
+					getTitle: () => title,
+					getMatrixRowValues1: () => matrixRow1,
+					getMatrixRowValues2: () => matrixRow2,
+				};
+				cards.push(newCard);
+			}
+			const labels = { label1: "Left side label", label2: "Right side label" };
+			const ic = {
+				getCards: () => cards,
+				getMaxNumOfRows: () => maxNumOfRows,
+				getModalLabels: () => labels,
+			};
+			root.appendChild(component);
+			component.ic = ic;
+		</script>
+	</head>
+	<body>
+		<div id="root" style="margin: 100px"></div>
+	</body>
+</html>
