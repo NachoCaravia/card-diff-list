@@ -201,20 +201,8 @@ function getCardsAndIndicesByRowLimit(
 			) {
 				continue;
 			}
-			const navigate = () => {
-				const nav = cards[i].navigate;
-				if (nav !== null) {
-					return nav();
-				}
-				return null;
-			};
-			const discardChanges = () => {
-				const discard = cards[i].discardChanges;
-				if (discard !== null) {
-					return discard();
-				}
-				return null;
-			};
+			const navigate = cards[i].navigate;
+			const discardChanges = cards[i].discardChanges;
 			/** @type {MatrixRowDiffListCard} */
 			const newCard = {
 				navigate,
