@@ -201,13 +201,11 @@ function getCardsAndIndicesByRowLimit(
 			) {
 				continue;
 			}
-			const navigate = cards[i].navigate;
-			const discardChanges = cards[i].discardChanges;
 			/** @type {MatrixRowDiffListCard} */
 			const newCard = {
-				navigate,
-				discardChanges,
-				getTitle: () => cards[i].getTitle(),
+				navigate: cards[i].navigate,
+				discardChanges: cards[i].discardChanges,
+				getTitle: cards[i].getTitle,
 				getMatrixRowValues1: () => filteredRow1,
 				getMatrixRowValues2: () => filteredRow2,
 			};

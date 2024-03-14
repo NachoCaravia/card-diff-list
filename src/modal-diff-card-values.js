@@ -219,10 +219,10 @@ class BnModalDiffCardValues extends HTMLElement {
 			group2Div.querySelector("span")
 		);
 		const label1Div = /** @type {HTMLDivElement} */ (
-			this.shadowRoot?.querySelector(".label-1")
+			group1Div.querySelector(".label-1")
 		);
 		const label2Div = /** @type {HTMLDivElement} */ (
-			this.shadowRoot?.querySelector(".label-2")
+			group2Div.querySelector(".label-2")
 		);
 		const label1Header = /** @type {HTMLElement} */ (
 			label1Div.querySelector("h4")
