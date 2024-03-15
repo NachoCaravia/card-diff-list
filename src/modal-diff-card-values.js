@@ -218,17 +218,11 @@ class BnModalDiffCardValues extends HTMLElement {
 		const value2Span = /** @type {HTMLSpanElement} */ (
 			group2Div.querySelector("span")
 		);
-		const label1Div = /** @type {HTMLDivElement} */ (
-			group1Div.querySelector(".label-1")
-		);
-		const label2Div = /** @type {HTMLDivElement} */ (
-			group2Div.querySelector(".label-2")
-		);
 		const label1Header = /** @type {HTMLElement} */ (
-			label1Div.querySelector("h4")
+			group1Div.querySelector("h4")
 		);
 		const label2Header = /** @type {HTMLElement} */ (
-			label2Div.querySelector("h4")
+			group2Div.querySelector("h4")
 		);
 		keySpan.innerText = ic.getKey();
 		value1Span.innerText = this.#value1;
